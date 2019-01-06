@@ -53,13 +53,7 @@ int main(){
     printArray(tempWord,length);
     bool finGame = false;
     int guesses = 6;
-    while(finGame != true){
-        int winner = strcmp(tempWord,word);
-        if(winner = 0){
-            printf("Congrats you got it!");
-            guesses = 0;
-            finGame = true;
-        }       
+    while(finGame != true){       
         char letter;
         printf("Enter a letter: \n");
         scanf(" %c",&letter);
@@ -70,12 +64,23 @@ int main(){
             printf("%d\n",guesses);
         }
 
+        int winner = strcmp(tempWord,word);
+        //printf("%d\n",winner);
+        if(winner == 10){
+            printf("Congrats you got it!\n");
+            guesses = 0;
+            finGame = true;
+        }
+
         if(guesses == 0){
             finGame = true;
+            if(winner != 10){
+                printf("Game over, you lost!\n");
+            }
         }
        
     }
-
+    /**
     printf("The word is: ");
     printArray(word,length);
     printf("\nThe tempword is: ");
@@ -90,7 +95,7 @@ int main(){
     if(tempWord != word){
         printf("you didn't get it\n");
     }   
-
+    **/
 
     return 0;
 }
