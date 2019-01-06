@@ -10,7 +10,6 @@ void printArray(char * array, int length){
 }
 
 void findLetter(char * word,char * tempWord, char c, int length){
-    int guesses = 6;
     for(int i = 0;i<length;++i){
         if(c == word[i]){
             tempWord[i]=c;
@@ -19,6 +18,16 @@ void findLetter(char * word,char * tempWord, char c, int length){
     printArray(tempWord,length);
 }
 
+
+bool checkTempArray(char * tempArray, int length){
+    for(int i = 0;i<length;++i){
+        if('*' == tempArray[i]){
+            return false; 
+        }
+    }
+
+    return false;
+}
 
 
 
@@ -46,12 +55,30 @@ int main(){
         printf("Enter a letter: \n");
         scanf(" %c",&letter);
         findLetter(word, tempWord, letter, length);
-        guesses--;
-        if(guesses==0){
+
+        if(tempWord == word){
+            printf("Congrats you got it!");
+            guesses = 0;
             finGame = true;
-            //printf("game over");
         }
+
+        if(!checkTempArray(tempWord,length)){
+            guesses--;
+            printf("%d\n",guesses);
+        }
+
+        if(guesses == 0){
+            finGame = true;
+        }
+       
     }
+
+    
+    
+    if(tempWord != word){
+        printf("you didn't get it :(");
+    }   
+
 
     return 0;
 }
