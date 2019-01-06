@@ -10,6 +10,7 @@ void printArray(char * array, int length){
 }
 
 void findLetter(char * word,char * tempWord, char c, int length){
+    int guesses = 6;
     for(int i = 0;i<length;++i){
         if(c == word[i]){
             tempWord[i]=c;
@@ -30,7 +31,7 @@ int main(){
     char word[256];
     char tempWord[256];
     scanf("%s", word);
-    int length = strlen(word);
+    int length = strlen(word) + 1;
     for(int i = 0; i<length; ++i){
         tempWord[i]='*';
         tempWord[length-1]='\n';
@@ -45,7 +46,11 @@ int main(){
         printf("Enter a letter: \n");
         scanf(" %c",&letter);
         findLetter(word, tempWord, letter, length);
-        finGame = true;
+        guesses--;
+        if(guesses==0){
+            finGame = true;
+            //printf("game over");
+        }
     }
 
     return 0;
